@@ -64,5 +64,52 @@ WHERE date < 930907
 GROUP BY date
 ORDER BY date DESC;
 #17. In the loan table, for each day in December 1997, count the number of loans issued for each unique loan duration, ordered by date and duration, both in ascending order. You can ignore days without any loans in your output.
-SELECT date, duration, amount FROM loan
+SELECT date, duration, count(loan_id) FROM loan
 WHERE date BETWEEN 971201 AND 971231
+GROUP BY date, duration
+ORDER BY date, duration;
+#18.In the trans table, for account_id 396, sum the amount of transactions for each type (VYDAJ = Outgoing, PRIJEM = Incoming). Your output should have the account_id, the type and the sum of amount, named as total_amount. Sort alphabetically by type.
+SELECT account_id, type, sum(amount) FROM trans 
+WHERE account_id = 396
+GROUP BY type
+ORDER BY type;
+#19.From the previous output, translate the values for type to English, rename the column to transaction_type, round total_amount down to an integer
+SELECT account_id,
+CASE
+ WHEN type = 'VYDAJ' THEN 'OUTGOING'
+ WHEN type = 'PRIJEM' THEN 'INCOMING'
+END AS transaction_type,
+FLOOR (SUM(amount)) AS total_amount
+FROM trans
+WHERE account_id = 396 
+GROUP BY type
+ORDER BY type;
+#20.From the previous result, modify your query so that it returns only one row, with a column for incoming amount, outgoing amount and the difference.
+SELECT account_id,
+FLOOR(SUM(CASE
+ WHEN type = 'PRIJEM' THEN amount
+ END)) AS incoming_amount,
+ FLOOR(SUM(CASE
+ WHEN type = 'VYDAJ' THEN amount
+END)) AS outgoing_amount,
+FLOOR (SUM(CASE
+ WHEN type = 'PRIJEM' THEN amount 
+ END) -
+     SUM(CASE
+     WHEN type = 'VYDAJ' THEN amount
+END)) AS difference
+FROM trans
+WHERE account_id = 396 
+GROUP BY account_id;
+#21.Continuing with the previous example, rank the top 10 account_ids based on their difference.
+SELECT account_id,
+ FLOOR (SUM(CASE
+ WHEN type = 'PRIJEM' THEN amount 
+ END) -
+     SUM(CASE
+     WHEN type = 'VYDAJ' THEN amount
+END)) AS difference
+FROM trans 
+GROUP BY account_id
+ORDER BY difference DESC
+LIMIT 10;
