@@ -29,7 +29,8 @@ WHERE duration = 60
 ORDER BY amount
 LIMIT 5;
 #8. What are the unique values of k_symbol in the order table?
-SELECT distinct(k_symbol) FROM bank.order;
+SELECT distinct(k_symbol) FROM bank.order
+WHERE k_symbol<> "";
 #9.In the order table, what are the order_ids of the client with the account_id 34?
 SELECT order_id FROM bank.order
 WHERE account_id = 34;
