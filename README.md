@@ -4,6 +4,6 @@
 
 ## Week 2 : Data_Marketing_Customer_Analysis, Pandas_Grouping by, auto_insurance_analysis
 
-## Week 3 :
+## Week 3 : SQL
 
-## Week 4 :
+## Week 4 :Pandas, Hypothesis Testing, Preprocessing, Machine_Learning( Creating a Model )
