@@ -10,4 +10,6 @@
 
 ## week 5 : MID-TERM PROJECT (Model and Tableau Dashbored)
 
-## week 6
+## week 6 : Web Scrapping
+
+## week 7 : Logistic Regression, KNN Clasification, DECISION TREE CLASSIFIER, Cross Validation, Managing imbalance in the dataset, Data Cleaning
